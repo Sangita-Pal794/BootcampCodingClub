@@ -1,13 +1,9 @@
-#!/bin/bash -x
+!/bin/bash -x
 function add()
 {
 echo $(($1+$2))
 }
 
-function mul()
-{
-echo $(($1*$2))
-}
 
 function div()
 {
