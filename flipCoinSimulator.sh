@@ -27,3 +27,16 @@ then
 else 
     echo "tails is winner by $(echo $((${a[1]}-${a[0]})))"
 fi
+
+a[0]=0
+a[1]=0
+while [ ${a[0]} -lt 3 ] &&  [ ${a[1]} -lt 3 ]
+do
+    temp=$(flip)
+    if [[ $temp == 'heads' ]]
+    then
+        a[0]=$((${a[0]}+1))
+    else
+        a[1]=$((${a[1]}+1))
+    fi
+done
