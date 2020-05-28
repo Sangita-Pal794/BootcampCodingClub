@@ -21,3 +21,9 @@ do
     fi
 done
 echo "score of heads is ${a[0]} and tails is ${a[1]}"
+if [[ ${a[0]} -gt ${a[1]} ]]
+then
+    echo "heads is winner by $(echo $((${a[0]}-${a[1]})))"
+else 
+    echo "tails is winner by $(echo $((${a[1]}-${a[0]})))"
+fi
