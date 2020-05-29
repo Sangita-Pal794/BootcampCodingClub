@@ -1,32 +1,50 @@
-#!/bin/bash -x
+#!/bin/bash 
 read -p "Enter a" a
 read -p "Enter b" b
 read -p "Enter c" c
-declare -A results
+declare -a results
 echo $a ""$b ""$c
 results[0]=$(($a +$(($b*$c))))
 results[1]=$(($c +$(($b*$a))))
 results[2]=$(($c +$(($a/$b))))
 results[3]=$(($c +$(($a%$b))))
-for i in "{results[@]}"
+echo ${results[@]}
+max ()
+{
+    #status=$(echo "$1 > $2" |bc)
+    if [[ $1 -gt $2 ]]
+    then 
+        echo $1
+    else
+        echo $2
+    fi
+
+}
+min ()
+{
+    x=$1
+    y=$2
+    if [[ $x < $y ]]
+    then
+        echo $x
+    else
+        echo $y
+    fi
+}
+
+declare -a sorted
+while [[ ${#results[@]} -gt 0 ]]
 do
-#echo "Array in original order"
-echo "$i => ${results[i]}" 
-for ((i = 0; i<4; i++)) 
-do
-      for((j = 0; j<4-i-1; j++)) 
+    #echo ${results[@]}
+    mx=${results[0]}
+    for i in ${results[@]}
     do
-         if [ ${results[j]} -gt ${results[$((j+1))]} ] 
-        then
-            # swap 
-            temp=${results[j]} 
-            results[$j]=${results[$((j+1))]}   
-            results[$((j+1))]=$temp 
-        fi
+        mx=$(max $i $mx )
     done
+    #echo $mi
+    delete=($mx)
+    results=(${results[@]/$delete})
+    #echo ${results[@]}
+    sorted[${#sorted[@]}]=$mx
 done
-echo "Array in sorted order :"
-for i in "{results[@]}"
-do
-echo "$i => ${results[i]}"
-done	
+echo ${sorted[@]}
